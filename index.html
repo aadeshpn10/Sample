@@ -27,20 +27,45 @@ body {
 }
 
 .content {
-  padding: 20px;
+  padding: 24px;
   display: none;
+  max-width: 720px;
+  margin: auto;
+}
+
+.section {
+  margin: 50px 0;
 }
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 20px 0;
+  gap: 14px;
+}
+
+.gallery figure {
+  margin: 0;
 }
 
 .gallery img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.gallery figcaption {
+  margin-top: 6px;
+  font-size: 14px;
+  font-style: italic;
+  color: #555;
+}
+
+.video-section {
+  margin-top: 50px;
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
 }
 </style>
 </head>
@@ -49,35 +74,122 @@ body {
 
 <div id="overlay">Tap to begin 🤍</div>
 
-<audio id="bgm" loop>
+<audio id="bgm">
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="content" id="content">
-  <h1>Happy Birthday 🤍</h1>
-  <p>This is not a gift.<br>This is a feeling.</p>
 
-  <div class="gallery">
-    <img src="1.jpg">
-    <img src="2.jpg">
-    <img src="3.jpg">
-    <img src="4.jpg">
+  <!-- OPENING -->
+  <div class="section">
+    <h1>Happy Birthday 🤍</h1>
+    <p>
+      Before you scroll,<br>
+      take a moment.<br><br>
+      This is not just a page.<br>
+      It’s something I made,<br>
+      thinking only of you.
+    </p>
   </div>
 
-  <p>
-    Write your message here.<br><br>
-    — Yours
-  </p>
+  <!-- PHOTO MEMORIES -->
+  <div class="section gallery">
+
+    <figure>
+      <img src="1.jpg">
+      <figcaption>The smile I never get tired of.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="2.jpg">
+      <figcaption>Some moments just feel right.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="3.jpg">
+      <figcaption>You, being you — effortlessly.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="4.jpg">
+      <figcaption>Quiet days like this matter the most.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="5.jpg">
+      <figcaption>A memory I hold close.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="6.jpg">
+      <figcaption>Soft, calm, and real.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="7.jpg">
+      <figcaption>The way you light up a moment.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="8.jpg">
+      <figcaption>Comfort looks like this.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="9.jpg">
+      <figcaption>A feeling I can’t explain easily.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="10.jpg">
+      <figcaption>Still my favourite.</figcaption>
+    </figure>
+
+  </div>
+
+  <!-- CORE MESSAGE -->
+  <div class="section">
+    <p>
+      Some people have a loud presence.<br><br>
+
+      You don’t.<br><br>
+
+      Yours is calm.<br>
+      Gentle.<br>
+      And deeply felt.<br><br>
+
+      You make things feel lighter,<br>
+      conversations warmer,<br>
+      and moments more meaningful.<br><br>
+
+      I hope this year protects your softness<br>
+      and gives you everything you quietly deserve.
+    </p>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="section video-section">
+    <p style="font-style:italic;">
+      One last thing, when you’re ready 🤍
+    </p>
+
+    <video controls playsinline>
+      <source src="wish.mp4" type="video/mp4">
+    </video>
+  </div>
+
 </div>
 
 <script>
-document.getElementById("overlay").addEventListener("click", function () {
-  const audio = document.getElementById("bgm");
+const overlay = document.getElementById("overlay");
+const content = document.getElementById("content");
+const audio = document.getElementById("bgm");
+
+overlay.addEventListener("click", function () {
   audio.volume = 0.6;
   audio.play();
-
-  document.getElementById("overlay").style.display = "none";
-  document.getElementById("content").style.display = "block";
+  overlay.style.display = "none";
+  content.style.display = "block";
 });
 </script>
 
