@@ -51,19 +51,26 @@ body {
 
 /* GALLERY */
 .gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;   /* slow reading */
+}
+
+.gallery figure {
+  margin: 0;
 }
 
 .gallery img {
   width: 100%;
-  border-radius: 14px;
+  max-width: 100%;
+  border-radius: 18px;
 }
 
 .gallery figcaption {
-  margin-top: 10px;
+  margin-top: 18px;
   font-style: italic;
+  font-size: 15px;
+  line-height: 1.6;
   color: #666;
 }
 
@@ -82,6 +89,10 @@ video {
   animation: floatUp 12s linear forwards;
 }
 
+.burst-heart {
+  z-index: 9999;
+}
+  
 .burst-heart {
   position: fixed;
   left: 50%;
