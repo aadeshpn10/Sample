@@ -41,7 +41,17 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+startBtn.onclick = () => {
+  heartBurst();                 // 🎉 birthday explosion
+  audio.volume = 0.6;
+  audio.play();
 
+  setTimeout(() => {
+    intro.style.display = "none";
+    content.style.display = "block";
+    startHearts();              // 💕 ambient hearts
+  }, 600);
+};
 /* MAIN CONTENT */
 .content {
   display: none;
@@ -82,12 +92,33 @@ video {
 .heart {
   position: fixed;
   bottom: -20px;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255,105,180,0.6);
-  border-radius: 50%;
-  transform: rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  transform: rotate(-45deg);
   animation: floatUp 10s linear infinite;
+  opacity: 0.6;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: 2px solid rgba(255, 105, 180, 0.6);
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -8px;
+  left: 0;
+}
+
+.heart::after {
+  left: 8px;
+  top: 0;
 }
 
 @keyframes floatUp {
@@ -96,13 +127,72 @@ video {
   100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
 }
 
-/* HEART BURST */
-.burst {
+.burst-heart {
   position: fixed;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%) rotate(-45deg);
   pointer-events: none;
-  z-index: 15;
+  opacity: 0.9;
+  animation: burstMove 1.4s ease-out forwards;
 }
+
+.burst-heart::before,
+.burst-heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 105, 180, 0.8);
+  border-radius: 50%;
+}
+
+.burst-heart::before {
+  top: -9px;
+  left: 0;
+}
+
+.burst-heart::after {
+  left: 9px;
+  top: 0;
+}
+
+@keyframes burstMove {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      rotate(-45deg)
+      scale(1.2);
+    opacity: 0;
+  }
+  }
+
+  function heartBurst() {
+  for (let i = 0; i < 28; i++) {
+    const heart = document.createElement("div");
+    heart.className = "burst-heart";
+
+    const x = (Math.random() - 0.5) * 500;
+    const y = (Math.random() - 0.5) * 500;
+
+    heart.style.setProperty("--x", `${x}px`);
+    heart.style.setProperty("--y", `${y}px`);
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1500);
+  }
+ }
+  
 </style>
 </head>
 
@@ -122,15 +212,23 @@ video {
 
   <!-- OPENING -->
   <div class="section">
-    <h1>Happy Birthday 🤍</h1>
-    <p>
-      I just want to say thank you.<br><br>
-      For being strong when it’s hard,<br>
-      gentle when it matters,<br>
-      and true to yourself always.<br><br>
-      You deserve encouragement, peace,<br>
-      and a year that supports you fully.
-    </p>
+  <h1>Happy Birthday 🤍</h1>
+  <p>
+    Before anything else,<br>
+    I just want to say thank you.<br><br>
+
+    Thank you for being patient when things take time,<br>
+    for being kind even when it’s not easy,<br>
+    and for showing up as yourself — always.<br><br>
+
+    You don’t always realise it,<br>
+    but your presence brings calm,<br>
+    and your words bring comfort.<br><br>
+
+    Today is a reminder of how valued you are,<br>
+    and how much you deserve to feel supported,<br>
+    encouraged, and appreciated.
+  </p>
   </div>
 
   <!-- PHOTOS -->
@@ -138,74 +236,81 @@ video {
 
   <figure>
     <img src="1.jpg">
-    <figcaption>The smile that quietly changes everything.</figcaption>
+    <figcaption>The smile that quietly makes everything feel lighter.</figcaption>
   </figure>
 
   <figure>
     <img src="2.jpg">
-    <figcaption>Moments like this stay longer than memories.</figcaption>
+    <figcaption>Some moments don’t need words — they’re felt.</figcaption>
   </figure>
 
   <figure>
     <img src="3.jpg">
-    <figcaption>You, being effortlessly yourself.</figcaption>
+    <figcaption>You, just being yourself — and that’s enough.</figcaption>
   </figure>
 
   <figure>
     <img src="4.jpg">
-    <figcaption>Softness is strength, and you have plenty of it.</figcaption>
+    <figcaption>Your calm has a way of bringing peace.</figcaption>
   </figure>
 
   <figure>
     <img src="5.jpg">
-    <figcaption>A calm presence I genuinely appreciate.</figcaption>
+    <figcaption>A memory that still feels warm.</figcaption>
   </figure>
 
   <figure>
     <img src="6.jpg">
-    <figcaption>The kind of smile that feels reassuring.</figcaption>
+    <figcaption>Strength doesn’t always have to be loud.</figcaption>
   </figure>
 
   <figure>
     <img src="7.jpg">
-    <figcaption>Quiet moments matter more than we realise.</figcaption>
+    <figcaption>Moments like these are quietly special.</figcaption>
   </figure>
 
   <figure>
     <img src="8.jpg">
-    <figcaption>Your warmth shows without trying.</figcaption>
+    <figcaption>Your presence makes spaces feel softer.</figcaption>
   </figure>
 
   <figure>
     <img src="9.jpg">
-    <figcaption>A feeling that words don’t fully explain.</figcaption>
+    <figcaption>A feeling I appreciate more than I say.</figcaption>
   </figure>
 
   <figure>
     <img src="10.jpg">
-    <figcaption>Still special. Still valued.</figcaption>
+    <figcaption>Still meaningful. Still special.</figcaption>
   </figure>
 
-</div>
-
+  </div>
   <!-- SPECIAL MESSAGE -->
   <div class="section">
-    <p>
-      Never doubt how special you are.<br>
-      Your presence brings warmth,<br>
-      your heart brings comfort,<br>
-      and your journey deserves celebration.
-    </p>
+  <p>
+    I hope you never feel the need to rush yourself.<br><br>
+
+    Growth takes time.<br>
+    Healing takes patience.<br>
+    And you’re doing better than you think.<br><br>
+
+    May this year give you confidence in your journey,<br>
+    strength on difficult days,<br>
+    and moments that remind you how far you’ve come.
+  </p>
   </div>
 
   <!-- VIDEO -->
-  <div class="section">
-    <p style="font-style:italic;">One last thing, just for you 🤍</p>
-    <video controls playsinline>
-      <source src="wish.mp4" type="video/mp4">
-    </video>
-  </div>
+<div class="section">
+  <p style="font-style:italic;">
+    And finally… something I wanted to say to you directly 🤍
+  </p>
 
+  <video controls playsinline>
+    <source src="wish.mp4" type="video/mp4">
+  </video>
+</div>
+  
 </div>
 
 <script>
