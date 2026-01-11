@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-/* INTRO SCREEN */
+/* INTRO */
 #intro {
   position: fixed;
   inset: 0;
@@ -24,12 +24,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 50;
-}
-
-#intro h1 {
-  font-size: 24px;
-  margin-bottom: 24px;
+  z-index: 10;
 }
 
 #startBtn {
@@ -42,7 +37,7 @@ body {
   cursor: pointer;
 }
 
-/* MAIN CONTENT */
+/* CONTENT */
 .content {
   display: none;
   padding: 26px;
@@ -70,60 +65,39 @@ body {
   margin-top: 10px;
   font-style: italic;
   color: #666;
-  line-height: 1.4;
 }
 
 /* VIDEO */
-.video-wrap {
-  margin-top: 90px;
-}
-
 video {
   width: 85%;
   max-width: 420px;
   border-radius: 14px;
 }
 
-/* HEART SVG */
+/* HEART ANIMATIONS */
 .heart {
   position: fixed;
   bottom: -40px;
-  width: 22px;
-  height: 22px;
   pointer-events: none;
   animation: floatUp 12s linear forwards;
 }
 
-@keyframes floatUp {
-  from {
-    transform: translateY(0) scale(0.8);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.6;
-  }
-  to {
-    transform: translateY(-120vh) scale(1.2);
-    opacity: 0;
-  }
-}
-
-/* BURST HEART */
 .burst-heart {
   position: fixed;
   left: 50%;
   top: 50%;
-  width: 28px;
-  height: 28px;
   pointer-events: none;
-  animation: burst 1.5s ease-out forwards;
+  animation: burst 1.4s ease-out forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  to { transform: translateY(-120vh); opacity: 0; }
 }
 
 @keyframes burst {
-  from {
-    transform: translate(-50%, -50%) scale(0.3);
-    opacity: 1;
-  }
+  from { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
   to {
     transform: translate(
       calc(-50% + var(--x)),
@@ -137,7 +111,6 @@ video {
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <h1>Here’s a surprise for you 🤍</h1>
   <button id="startBtn">Tap to unwrap 🤍</button>
@@ -149,21 +122,15 @@ video {
 
 <div class="content" id="content">
 
-  <!-- OPENING -->
   <div class="section">
     <h1>Happy Birthday 🤍</h1>
     <p>
       Thank you for being calm when things feel heavy,<br>
       kind when it matters most,<br>
-      and true to yourself always.<br><br>
-
-      You deserve a year that supports you,<br>
-      believes in you,<br>
-      and reminds you how special you truly are.
+      and true to yourself always.
     </p>
   </div>
 
-  <!-- PHOTOS -->
   <div class="section gallery">
     <figure><img src="1.jpg"><figcaption>The smile that quietly changes everything.</figcaption></figure>
     <figure><img src="2.jpg"><figcaption>Some moments are felt, not explained.</figcaption></figure>
@@ -177,21 +144,8 @@ video {
     <figure><img src="10.jpg"><figcaption>Still meaningful. Still special.</figcaption></figure>
   </div>
 
-  <!-- FINAL MESSAGE -->
   <div class="section">
     <p>
-      Never rush yourself.<br>
-      You’re growing at the right pace.<br><br>
-
-      I hope this year gives you confidence,<br>
-      peace on difficult days,<br>
-      and moments that feel like gentle wins.
-    </p>
-  </div>
-
-  <!-- VIDEO -->
-  <div class="section video-wrap">
-    <p style="font-style: italic;">
       One last thing, when you’re ready 🤍
     </p>
     <video controls playsinline>
@@ -207,45 +161,41 @@ const intro = document.getElementById("intro");
 const content = document.getElementById("content");
 const audio = document.getElementById("bgm");
 
-/* SVG HEART */
 const heartSVG = `
-<svg viewBox="0 0 32 29" fill="none">
-  <path d="M23.6 0C20.9 0 18.7 1.6 16 4.1C13.3 1.6 11.1 0 8.4 0C3.8 0 0 3.8 0 8.4C0 16.5 16 29 16 29C16 29 32 16.5 32 8.4C32 3.8 28.2 0 23.6 0Z"
-    stroke="rgba(255,105,180,0.7)" stroke-width="2" fill="none"/>
+<svg viewBox="0 0 32 29" width="24" height="24">
+<path d="M23.6 0C20.9 0 18.7 1.6 16 4.1
+C13.3 1.6 11.1 0 8.4 0
+C3.8 0 0 3.8 0 8.4
+C0 16.5 16 29 16 29
+C16 29 32 16.5 32 8.4
+C32 3.8 28.2 0 23.6 0Z"
+fill="none" stroke="rgba(255,105,180,0.8)" stroke-width="2"/>
 </svg>`;
 
-/* FLOATING HEARTS */
-function startHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.innerHTML = heartSVG;
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 12000);
-  }, 1200);
-}
-
-/* BURST HEARTS */
 function heartBurst() {
-  for (let i = 0; i < 32; i++) {
-    const heart = document.createElement("div");
-    heart.className = "burst-heart";
-    heart.innerHTML = heartSVG;
-
-    const x = (Math.random() - 0.5) * 600;
-    const y = (Math.random() - 0.5) * 600;
-
-    heart.style.setProperty("--x", `${x}px`);
-    heart.style.setProperty("--y", `${y}px`);
-
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1500);
+  for (let i = 0; i < 30; i++) {
+    const h = document.createElement("div");
+    h.className = "burst-heart";
+    h.innerHTML = heartSVG;
+    h.style.setProperty("--x", (Math.random()-0.5)*600+"px");
+    h.style.setProperty("--y", (Math.random()-0.5)*600+"px");
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1400);
   }
 }
 
-/* START */
-startBtn.onclick = () => {
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = heartSVG;
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 12000);
+  }, 1200);
+}
+
+startBtn.addEventListener("click", () => {
   heartBurst();
   audio.volume = 0.6;
   audio.play();
@@ -254,315 +204,8 @@ startBtn.onclick = () => {
     intro.style.display = "none";
     content.style.display = "block";
     startHearts();
-  }, 700);
-};
-</script>
-
-</body>
-</html>  border: none;
-  border-radius: 30px;
-  background: #f2a7c6;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-startBtn.onclick = () => {
-  heartBurst();                 // 🎉 birthday explosion
-  audio.volume = 0.6;
-  audio.play();
-
-  setTimeout(() => {
-    intro.style.display = "none";
-    content.style.display = "block";
-    startHearts();              // 💕 ambient hearts
   }, 600);
-};
-/* MAIN CONTENT */
-.content {
-  display: none;
-  padding: 24px;
-  max-width: 720px;
-  margin: auto;
-}
-
-.section {
-  margin: 60px 0;
-}
-
-/* GALLERY */
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-}
-
-.gallery img {
-  width: 100%;
-  border-radius: 14px;
-}
-
-.gallery figcaption {
-  margin-top: 8px;
-  font-style: italic;
-  color: #555;
-}
-
-/* VIDEO */
-video {
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* FLOATING HEARTS */
-.heart {
-  position: fixed;
-  bottom: -20px;
-  width: 16px;
-  height: 16px;
-  background: transparent;
-  transform: rotate(-45deg);
-  animation: floatUp 10s linear infinite;
-  opacity: 0.6;
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: transparent;
-  border: 2px solid rgba(255, 105, 180, 0.6);
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -8px;
-  left: 0;
-}
-
-.heart::after {
-  left: 8px;
-  top: 0;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { opacity: 0.6; }
-  100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-}
-
-.burst-heart {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  pointer-events: none;
-  opacity: 0.9;
-  animation: burstMove 1.4s ease-out forwards;
-}
-
-.burst-heart::before,
-.burst-heart::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 105, 180, 0.8);
-  border-radius: 50%;
-}
-
-.burst-heart::before {
-  top: -9px;
-  left: 0;
-}
-
-.burst-heart::after {
-  left: 9px;
-  top: 0;
-}
-
-@keyframes burstMove {
-  0% {
-    transform: translate(-50%, -50%) rotate(-45deg) scale(0.3);
-    opacity: 1;
-  }
-  100% {
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      rotate(-45deg)
-      scale(1.2);
-    opacity: 0;
-  }
-  }
-
-  function heartBurst() {
-  for (let i = 0; i < 28; i++) {
-    const heart = document.createElement("div");
-    heart.className = "burst-heart";
-
-    const x = (Math.random() - 0.5) * 500;
-    const y = (Math.random() - 0.5) * 500;
-
-    heart.style.setProperty("--x", `${x}px`);
-    heart.style.setProperty("--y", `${y}px`);
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 1500);
-  }
- }
-  
-</style>
-</head>
-
-<body>
-
-<!-- INTRO -->
-<div id="intro">
-  <h1>Here’s a surprise for you 🤍</h1>
-  <button id="startBtn">Tap to unwrap 🤍</button>
-</div>
-
-<audio id="bgm">
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-
-<div class="content" id="content">
-
-  <!-- OPENING -->
-  <div class="section">
-  <h1>Happy Birthday 🤍</h1>
-  <p>
-    Before anything else,<br>
-    I just want to say thank you.<br><br>
-
-    Thank you for being patient when things take time,<br>
-    for being kind even when it’s not easy,<br>
-    and for showing up as yourself — always.<br><br>
-
-    You don’t always realise it,<br>
-    but your presence brings calm,<br>
-    and your words bring comfort.<br><br>
-
-    Today is a reminder of how valued you are,<br>
-    and how much you deserve to feel supported,<br>
-    encouraged, and appreciated.
-  </p>
-  </div>
-
-  <!-- PHOTOS -->
-  <div class="section gallery">
-
-  <figure>
-    <img src="1.jpg">
-    <figcaption>The smile that quietly makes everything feel lighter.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="2.jpg">
-    <figcaption>Some moments don’t need words — they’re felt.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="3.jpg">
-    <figcaption>You, just being yourself — and that’s enough.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="4.jpg">
-    <figcaption>Your calm has a way of bringing peace.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="5.jpg">
-    <figcaption>A memory that still feels warm.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="6.jpg">
-    <figcaption>Strength doesn’t always have to be loud.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="7.jpg">
-    <figcaption>Moments like these are quietly special.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="8.jpg">
-    <figcaption>Your presence makes spaces feel softer.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="9.jpg">
-    <figcaption>A feeling I appreciate more than I say.</figcaption>
-  </figure>
-
-  <figure>
-    <img src="10.jpg">
-    <figcaption>Still meaningful. Still special.</figcaption>
-  </figure>
-
-  </div>
-  <!-- SPECIAL MESSAGE -->
-  <div class="section">
-  <p>
-    I hope you never feel the need to rush yourself.<br><br>
-
-    Growth takes time.<br>
-    Healing takes patience.<br>
-    And you’re doing better than you think.<br><br>
-
-    May this year give you confidence in your journey,<br>
-    strength on difficult days,<br>
-    and moments that remind you how far you’ve come.
-  </p>
-  </div>
-
-  <!-- VIDEO -->
-<div class="section">
-  <p style="font-style:italic;">
-    And finally… something I wanted to say to you directly 🤍
-  </p>
-
-  <video controls playsinline>
-    <source src="wish.mp4" type="video/mp4">
-  </video>
-</div>
-  
-</div>
-
-<script>
-const startBtn = document.getElementById("startBtn");
-const intro = document.getElementById("intro");
-const content = document.getElementById("content");
-const audio = document.getElementById("bgm");
-
-/* START EXPERIENCE */
-startBtn.onclick = () => {
-  audio.volume = 0.6;
-  audio.play();
-  intro.style.display = "none";
-  content.style.display = "block";
-  startHearts();
-};
-
-/* FLOATING HEARTS */
-function startHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 10000);
-  }, 1200);
-}
+});
 </script>
 
 </body>
