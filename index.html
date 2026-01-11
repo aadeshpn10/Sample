@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday 🤍</title>
+<title>For You 🤍</title>
 
 <style>
 body {
@@ -11,68 +11,108 @@ body {
   font-family: Georgia, serif;
   background: #f7f4f0;
   color: #333;
+  overflow-x: hidden;
   text-align: center;
 }
 
-#overlay {
+/* LANDING SCREEN */
+#intro {
   position: fixed;
   inset: 0;
   background: #f7f4f0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 10;
+  z-index: 20;
 }
 
+#intro h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#startBtn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 30px;
+  background: #f2a7c6;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
 .content {
-  padding: 24px;
   display: none;
+  padding: 24px;
   max-width: 720px;
   margin: auto;
 }
 
 .section {
-  margin: 50px 0;
+  margin: 60px 0;
 }
 
+/* GALLERY */
 .gallery {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 28px;
-}
-
-.gallery figure {
-  margin: 0;
+  gap: 32px;
 }
 
 .gallery img {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .gallery figcaption {
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: 8px;
   font-style: italic;
   color: #555;
 }
 
-.video-section {
-  margin-top: 50px;
-}
-
+/* VIDEO */
 video {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 14px;
+}
+
+/* FLOATING HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,105,180,0.6);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  animation: floatUp 10s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+}
+
+/* HEART BURST */
+.burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
 }
 </style>
 </head>
 
 <body>
 
-<div id="overlay">Tap to begin 🤍</div>
+<!-- INTRO -->
+<div id="intro">
+  <h1>Here’s a surprise for you 🤍</h1>
+  <button id="startBtn">Tap to unwrap 🤍</button>
+</div>
 
 <audio id="bgm">
   <source src="song.mp3" type="audio/mpeg">
@@ -84,95 +124,83 @@ video {
   <div class="section">
     <h1>Happy Birthday 🤍</h1>
     <p>
-      Before you scroll,<br>
-      take a moment.<br><br>
-      This is not just a page.<br>
-      It’s something I made,<br>
-      thinking only of you.
+      I just want to say thank you.<br><br>
+      For being strong when it’s hard,<br>
+      gentle when it matters,<br>
+      and true to yourself always.<br><br>
+      You deserve encouragement, peace,<br>
+      and a year that supports you fully.
     </p>
   </div>
 
-  <!-- PHOTO MEMORIES -->
+  <!-- PHOTOS -->
   <div class="section gallery">
 
-    <figure>
-      <img src="1.jpg">
-      <figcaption>The smile I never get tired of.</figcaption>
-    </figure>
+  <figure>
+    <img src="1.jpg">
+    <figcaption>The smile that quietly changes everything.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="2.jpg">
-      <figcaption>Some moments just feel right.</figcaption>
-    </figure>
+  <figure>
+    <img src="2.jpg">
+    <figcaption>Moments like this stay longer than memories.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="3.jpg">
-      <figcaption>You, being you — effortlessly.</figcaption>
-    </figure>
+  <figure>
+    <img src="3.jpg">
+    <figcaption>You, being effortlessly yourself.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="4.jpg">
-      <figcaption>Quiet days like this matter the most.</figcaption>
-    </figure>
+  <figure>
+    <img src="4.jpg">
+    <figcaption>Softness is strength, and you have plenty of it.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="5.jpg">
-      <figcaption>A memory I hold close.</figcaption>
-    </figure>
+  <figure>
+    <img src="5.jpg">
+    <figcaption>A calm presence I genuinely appreciate.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="6.jpg">
-      <figcaption>Soft, calm, and real.</figcaption>
-    </figure>
+  <figure>
+    <img src="6.jpg">
+    <figcaption>The kind of smile that feels reassuring.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="7.jpg">
-      <figcaption>The way you light up a moment.</figcaption>
-    </figure>
+  <figure>
+    <img src="7.jpg">
+    <figcaption>Quiet moments matter more than we realise.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="8.jpg">
-      <figcaption>Comfort looks like this.</figcaption>
-    </figure>
+  <figure>
+    <img src="8.jpg">
+    <figcaption>Your warmth shows without trying.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="9.jpg">
-      <figcaption>A feeling I can’t explain easily.</figcaption>
-    </figure>
+  <figure>
+    <img src="9.jpg">
+    <figcaption>A feeling that words don’t fully explain.</figcaption>
+  </figure>
 
-    <figure>
-      <img src="10.jpg">
-      <figcaption>Still my favourite.</figcaption>
-    </figure>
+  <figure>
+    <img src="10.jpg">
+    <figcaption>Still special. Still valued.</figcaption>
+  </figure>
 
-  </div>
+</div>
 
-  <!-- CORE MESSAGE -->
+  <!-- SPECIAL MESSAGE -->
   <div class="section">
     <p>
-      Some people have a loud presence.<br><br>
-
-      You don’t.<br><br>
-
-      Yours is calm.<br>
-      Gentle.<br>
-      And deeply felt.<br><br>
-
-      You make things feel lighter,<br>
-      conversations warmer,<br>
-      and moments more meaningful.<br><br>
-
-      I hope this year protects your softness<br>
-      and gives you everything you quietly deserve.
+      Never doubt how special you are.<br>
+      Your presence brings warmth,<br>
+      your heart brings comfort,<br>
+      and your journey deserves celebration.
     </p>
   </div>
 
   <!-- VIDEO -->
-  <div class="section video-section">
-    <p style="font-style:italic;">
-      One last thing, when you’re ready 🤍
-    </p>
-
+  <div class="section">
+    <p style="font-style:italic;">One last thing, just for you 🤍</p>
     <video controls playsinline>
       <source src="wish.mp4" type="video/mp4">
     </video>
@@ -181,16 +209,30 @@ video {
 </div>
 
 <script>
-const overlay = document.getElementById("overlay");
+const startBtn = document.getElementById("startBtn");
+const intro = document.getElementById("intro");
 const content = document.getElementById("content");
 const audio = document.getElementById("bgm");
 
-overlay.addEventListener("click", function () {
+/* START EXPERIENCE */
+startBtn.onclick = () => {
   audio.volume = 0.6;
   audio.play();
-  overlay.style.display = "none";
+  intro.style.display = "none";
   content.style.display = "block";
-});
+  startHearts();
+};
+
+/* FLOATING HEARTS */
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+  }, 1200);
+}
 </script>
 
 </body>
