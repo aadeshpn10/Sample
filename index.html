@@ -207,14 +207,19 @@ function startHearts() {
 }
 
 startBtn.addEventListener("click", () => {
-  heartBurst();
   audio.volume = 0.6;
   audio.play();
 
   setTimeout(() => {
     intro.style.display = "none";
     content.style.display = "block";
-    startHearts();
+
+    // 🎉 burst AFTER page opens
+    setTimeout(() => {
+      heartBurst();
+      startHearts();
+    }, 300);
+
   }, 600);
 });
 </script>
