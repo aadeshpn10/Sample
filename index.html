@@ -123,7 +123,7 @@ video {
 <body>
 
 <div id="intro">
-  <h1>Here’s a surprise for you 🤍</h1>
+  <h1>This is for you!!</h1>
   <button id="startBtn">Tap to unwrap 🤍</button>
 </div>
 
@@ -135,7 +135,7 @@ video {
   <!-- OPENING MESSAGE -->
 <div class="section">
   <p>
-    Happy Birthday 🤍<br><br>
+    <span style="font-size: 26px; font-weight: bold;">Happy Birthday Bebbuuuu🤍</span>
 
     Your presence makes everything feel lighter.<br>
     Your smile is cute, beautiful, and genuinely special to me.<br>
@@ -335,9 +335,7 @@ function startHearts() {
 }
 
 startBtn.addEventListener("click", () => {
-  audio.volume = 0.6;
-  audio.play();
-
+  
   setTimeout(() => {
     intro.style.display = "none";
     content.style.display = "block";
@@ -346,6 +344,9 @@ startBtn.addEventListener("click", () => {
     setTimeout(() => {
       heartBurst();
       startHearts();
+    audio.volume = 0.6;
+    audio.play();
+      
     }, 300);
 
   }, 600);
